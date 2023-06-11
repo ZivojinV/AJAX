@@ -29,8 +29,9 @@ window.onload = function getMoviesById(){
             for (let i = 0; i < data.length; i++) {
                 const id = data[i].id;
                 const name = data[i].naziv;
-                console.log(data[i].naziv)
-                insertRow(id, name);
+                const genre = data[i].zanr;
+                console.log(data[i].zanr)
+                insertRow(id, name, genre);
             }    
         },
         error: function(xhr){
@@ -40,16 +41,18 @@ window.onload = function getMoviesById(){
 }
 
 function saveMovie(){
+    console.log(document.getElementById("genre").value)
     $.ajax({
         url: 'handler/addMovie.php',
         type: 'post',
         data: {
             "userID": localStorage.getItem("id"),
-            "name": document.getElementById("name").value
+            "name": document.getElementById("name").value,
+            "genre": document.getElementById("genre").value
         },
         success: function(response){
             alert("Sacuvano" + response);
-
+            window.location.reload();
         },
         error: function(xhr){
             alert("GRESKA" + xhr);
@@ -83,6 +86,7 @@ function deleteMovie(id){
         },
         success: function(response){
             alert("Sacuvano" + response);
+            window.location.reload();
         },
         error: function(xhr){
             alert("GRESKA" + xhr);
@@ -90,15 +94,17 @@ function deleteMovie(id){
      });
 }
 
-function insertRow(id, name){
+function insertRow(id, name, genre){
     var table = document.getElementById("myTable");
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
     cell1.innerHTML = id;
     cell2.innerHTML = name;
-    cell3.innerHTML = '<button class="btn-inv" onClick="deleteMovie('+id+')">Delete</button>';
+    cell3.innerHTML = genre;
+    cell4.innerHTML = '<button class="btn-inv" onClick="deleteMovie('+id+')">Delete</button>';
  }
 
  function search(){
@@ -135,8 +141,56 @@ function insertRow(id, name){
         const data = JSON.parse(response);
         for (let i = 0; i < data.length; i++) {
             const id = data[i].id;
-            const name = data[i].name;
-            insertRow(id, name);
+            const name = data[i].naziv;
+            const genre = data[i].zanr;
+            insertRow(id, name, genre);
+        }   
+            
+        },
+        error: function(xhr){
+            alert("GRESKA" + xhr.status);
+        }
+     });
+     
+ }
+
+ function searchGenre(){
+    let id = "";
+    let name = "";
+    const table = document.getElementById('myTable');
+    if (table) {
+        while (table.rows.length > 1) {
+        table.deleteRow(1);
+        }
+    }
+    $.ajax({
+        url: 'handler/getMovieByGenre.php',
+        type: 'get',
+        data: { 
+            "id": localStorage.getItem("id"),
+            "genre": document.getElementById("genre").value,
+        },
+        success: function(response){
+            if(response == "") {
+                return 'a';
+            }
+        //    let arr = [];
+        //    arr=response.split("\"\"");
+        //    for(let k = 0;k<arr.length;k++ ){
+        //        arr[k]=arr[k].replaceAll('\"', '');
+        //    }
+        //    for (let i = 0; i < arr.length; i++) {
+        //        id = arr[i].split("|")[0];
+        //        name = arr[i].split("|")[1];
+        //        console.log(id + name);
+        //        insertRow(id, name);
+        //    }
+        const data = JSON.parse(response);
+        for (let i = 0; i < data.length; i++) {
+            const id = data[i].id;
+            const name = data[i].naziv;
+            const genre = data[i].zanr;
+            insertRow(id, name, genre);
         }   
             
         },

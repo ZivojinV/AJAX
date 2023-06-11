@@ -15,21 +15,28 @@
 </head>
 <body>
     <div class="navbar">
+      <label>Name</label>
       <input type="text" name="" id="name">
-      <button class="btn" onclick="search()" style="margin-left: 20px;">Search</button>
+      <label>Genre</label>
+      <input type="text" name="" id="genre">
+      <button class="btn" onclick="search()" style="margin-left: 20px;">Search by name</button>
+      <button class="btn" onclick="searchGenre()" style="margin-left: 20px;">Search by genre</button>
       <button class="btn" onclick="saveMovie()" style="margin-left: 20px;">Insert</button>
       <button onclick="location.href='index.html'" class="btn" style="margin-left: 20px;">Logout</button>
     </div>
-    <table id="myTable" class="table">
-      <thead>
-         <tr>
-            <td>#</td>
-            <td>Name</td>
-            <td>Delete</td>
-         </tr>
-      </thead>
-      <tbody>  
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table id="myTable" class="table">
+        <thead>
+           <tr>
+              <td>#</td>
+              <td>Name</td>
+              <td>Genre</td>
+              <td>Delete</td>
+           </tr>
+        </thead>
+        <tbody>  
+        </tbody>
+      </table>
+    </div>
 </body>
 </html>

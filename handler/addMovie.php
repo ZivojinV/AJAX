@@ -13,11 +13,12 @@
             exit("Konekcija neuspesna: " . $conn->connect_errno);
         }
         $name = $_POST["name"];
+        $genre = $_POST["genre"];
 
         // $userID = $_POST['userID'];
         $userID = $_COOKIE['user_id'];
 
-        movie::add($name, $userID, $conn);
+        movie::add($name, $userID, $genre, $conn);
     } catch(Exception $e){
         echo $e->getMessage() . "<br/>";
             while($e = $e->getPrevious()) {

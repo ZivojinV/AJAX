@@ -23,7 +23,8 @@
        while($data = $res->fetch_assoc()){
         $id = $data['id'];
         $name = $data['naziv'];
-        $results[] = array('id' => $id, 'naziv' => $name);
+        $genre = $data['zanr'];
+        $results[] = array('id' => $id, 'naziv' => $name, 'zanr' => $genre);
     }
     echo json_encode($results);
         

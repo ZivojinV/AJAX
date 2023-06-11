@@ -14,9 +14,8 @@
         }
 
         $id = $_COOKIE['user_id'];
-        $name = $_GET["name"];
-
-        $res = movie::getByName($id, $name, $conn);
+        $genre = $_GET["genre"];
+        $res = movie::getByGenre($id, $genre, $conn);
 
         //while($data = $res->fetch_assoc()){
         //    echo json_encode($data['id']."|".$data['name']."|");
