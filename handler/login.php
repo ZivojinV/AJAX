@@ -3,7 +3,7 @@
 
     session_start();
     $host = "localhost";
-    $db = "playlist";
+    $db = "watchlist";
     $username = "root";
     $password = "";
     try{

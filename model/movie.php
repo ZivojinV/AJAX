@@ -1,5 +1,5 @@
 <?php
-    class song {
+    class movie {
  
         public $id;
         public $name;
@@ -13,23 +13,23 @@
 
         public static function deleteById($id, mysqli $conn)
         {
-            $q = "DELETE FROM playlist.song WHERE playlist.song.id='$id'";
+            $q = "DELETE FROM watchlist.film WHERE watchlist.film.id='$id'";
             return $conn->query($q);
         }
 
         public static function add($name, $userID, mysqli $conn)
         {
-            $q = "INSERT INTO playlist.song(name, userID) VALUES('$name', '$userID')";
+            $q = "INSERT INTO watchlist.film(naziv, korisnikID) VALUES('$name', '$userID')";
             return $conn->query($q); 
         }
 
         public static function getByName($id, $name, mysqli $conn){
-            $q = "SELECT s.id, s.name FROM playlist.song s WHERE s.userID='$id' AND s.name='$name'";
+            $q = "SELECT s.id, s.naziv FROM watchlist.film s WHERE s.korisnikID='$id' AND s.naziv='$name'";
             return $conn->query($q); 
         }
 
         public static function getByUserId($userID, mysqli $conn){
-            $q = "SELECT s.id, s.name FROM playlist.song s WHERE s.userID='$userID'";
+            $q = "SELECT s.id, s.naziv FROM watchlist.film s WHERE s.korisnikID='$userID'";
             return $conn->query($q); 
         }
 

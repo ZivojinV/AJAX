@@ -16,7 +16,9 @@ function login() {
                 const json = response;
                 const obj = JSON.parse(json);
                 const id = obj.id;
-                location.href="player.html";
+                localStorage.setItem("id", id)
+                console.log(id)
+                location.href="watchlist.html";
             }
         },
         error: function(xhr){

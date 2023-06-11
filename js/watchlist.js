@@ -1,7 +1,7 @@
-window.onload = function getSongsById(){
+window.onload = function getMoviesById(){
     console.log(localStorage.getItem("id"));
     $.ajax({
-        url: 'handler/getSongsById.php',
+        url: 'handler/getMoviesById.php',
         type: 'get',
         data: { 
             "userID": localStorage.getItem("id"),
@@ -28,7 +28,8 @@ window.onload = function getSongsById(){
         const data = JSON.parse(response);
             for (let i = 0; i < data.length; i++) {
                 const id = data[i].id;
-                const name = data[i].name;
+                const name = data[i].naziv;
+                console.log(data[i].naziv)
                 insertRow(id, name);
             }    
         },
@@ -38,9 +39,9 @@ window.onload = function getSongsById(){
      });
 }
 
-function saveSong(){
+function saveMovie(){
     $.ajax({
-        url: 'handler/addSong.php',
+        url: 'handler/addMovie.php',
         type: 'post',
         data: {
             "userID": localStorage.getItem("id"),
@@ -73,9 +74,9 @@ function saveSong(){
 //         }
 //      });
 // }
-function deleteSong(id){
+function deleteMovie(id){
     $.ajax({
-        url: 'handler/deleteSong.php',
+        url: 'handler/deleteMovie.php',
         type: 'delete',
         data: { 
             "id": id
@@ -97,7 +98,7 @@ function insertRow(id, name){
     var cell3 = row.insertCell(2);
     cell1.innerHTML = id;
     cell2.innerHTML = name;
-    cell3.innerHTML = '<button class="btn-inv" onClick="deleteSong('+id+')">Delete</button>';
+    cell3.innerHTML = '<button class="btn-inv" onClick="deleteMovie('+id+')">Delete</button>';
  }
 
  function search(){
@@ -110,7 +111,7 @@ function insertRow(id, name){
         }
     }
     $.ajax({
-        url: 'handler/getSongByName.php',
+        url: 'handler/getMovieByName.php',
         type: 'get',
         data: { 
             "id": localStorage.getItem("id"),

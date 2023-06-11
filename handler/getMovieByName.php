@@ -1,9 +1,9 @@
 <?php
-    require  "../model/song.php";
+    require  "../model/movie.php";
 
     session_start();
     $host = "localhost";
-    $db = "playlist";
+    $db = "watchlist";
     $username = "root";
     $password = "";
     try{
@@ -16,7 +16,7 @@
         $id = $_COOKIE['user_id'];
         $name = $_GET["name"];
 
-        $res = song::getByName($id, $name, $conn);
+        $res = movie::getByName($id, $name, $conn);
 
         //while($data = $res->fetch_assoc()){
         //    echo json_encode($data['id']."|".$data['name']."|");

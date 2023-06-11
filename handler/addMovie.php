@@ -1,9 +1,9 @@
 <?php
-    require  "../model/song.php";
+    require  "../model/movie.php";
     
     session_start();
     $host = "localhost";
-    $db = "playlist";
+    $db = "watchlist";
     $username = "root";
     $password = "";
     try{
@@ -17,7 +17,7 @@
         // $userID = $_POST['userID'];
         $userID = $_COOKIE['user_id'];
 
-        song::add($name, $userID, $conn);
+        movie::add($name, $userID, $conn);
     } catch(Exception $e){
         echo $e->getMessage() . "<br/>";
             while($e = $e->getPrevious()) {

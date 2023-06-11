@@ -9,12 +9,12 @@
             $this->password = $password;
         }
         public static function logIn($username, $password, mysqli $conn){
-            $q = "SELECT id FROM playlist.user WHERE playlist.user.username='$username' AND playlist.user.password='$password'";
+            $q = "SELECT id FROM watchlist.korisnik WHERE watchlist.korisnik.ime='$username' AND watchlist.korisnik.lozinka='$password'";
             return $conn->query($q)->fetch_assoc();
         }
 
         public static function register($username, $password, mysqli $conn){
-            $q = "INSERT INTO playlist.user(username, password) VALUES('$username', '$password')";
+            $q = "INSERT INTO watchlist.korisnik(ime, lozinka) VALUES('$username', '$password')";
             return $conn->query($q)->fetch_assoc();
         }
     }
